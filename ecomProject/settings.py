@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3e125$k#x#b6lu5ge!^@iy41=0y7z_!o==!-kto)03w!2e_b&e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["oyster-app","ecomdetective.com"]
 
 
 # Application definition
