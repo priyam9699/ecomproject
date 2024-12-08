@@ -1,0 +1,314 @@
+{% extends "ecomApp/layout.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>Search</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/search.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/intlTelInput.css' %}" media="screen">
+    <script src="{% static 'js/jquery.js' %}" defer=""></script>
+    <script src="{% static 'js/nicepage.js' %}" defer=""></script>
+    <script src="{% static 'js/intlTelInput.min..js' %}" defer=""></script>
+    <meta name="generator" content="Nicepage 7.0.3, nicepage.com">
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Search">
+    <meta property="og:type" content="website">
+    <meta data-intl-tel-input-cdn-path="intlTelInput/">
+    <style>
+        .search-container {
+            justify-content: center;
+            width: 700px;
+            align-items: center;
+            background: white;
+            border: 2px solid #ccc;
+            border-radius: 30px;
+            margin-left: 230px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sort-container{
+            justify-content: center;
+            width: 300px;
+            align-items: center;
+            background: white;
+            border: 2px solid #ccc;
+            border-radius: 30px;
+            margin-left: 230px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 30px;
+        }
+
+        .search-box::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 40px;
+            font-size: 18px;
+            margin-top: -6px;
+            color: #aaa;
+        }
+
+        .search-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .search-button:focus {
+            outline: none;
+        }
+
+        .category-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 45px;
+            gap: 15px;
+        }
+
+
+        .category-button {
+            padding: 5px 20px;
+            border-color: black;
+            color: black;
+
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .category-button:hover {
+            background-color: lightblue;
+        }
+        /* Adjust styles for screens smaller than 768px */
+@media (max-width: 768px) {
+    /* Search container adjustments */
+    .search-container {
+        width: 90%; /* Use a percentage for responsive width */
+        margin: 10px auto; /* Center the container */
+        padding: 5px;
+        box-shadow: none; /* Optional: Reduce shadow for mobile simplicity */
+    }
+
+    .search-box {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    .search-icon {
+        font-size: 16px; /* Adjust icon size */
+    }
+
+    .search-button {
+        padding: 8px 15px; /* Adjust padding for better fit */
+        font-size: 14px; /* Adjust font size */
+    }
+
+    /* Category buttons adjustments */
+    .category-buttons {
+        margin-top: 0px;
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the start */
+    gap: 7px; /* Add space between buttons */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Ensure all buttons stay in a single line */
+    padding: 10px 0;
+    scrollbar-width: thin; /* Optional: Thin scrollbar for Firefox */
+        font-size: 10px;
+}
+
+    .category-buttons::-webkit-scrollbar {
+    height: 6px; /* Optional: Adjust scrollbar height for WebKit browsers */
+}
+    .category-buttons::-webkit-scrollbar-thumb {
+    background: #007bff; /* Optional: Style for the scrollbar thumb */
+    border-radius: 3px;
+}
+    .category-buttons::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Optional: Style for the scrollbar track */
+}
+
+.category-button {
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+    /* Sort container adjustments */
+    .sort-container {
+        width: 90%; /* Use responsive width */
+        margin: 10px auto; /* Center the sort container */
+        padding: 5px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+<div class="content">
+    <section class="u-clearfix u-white u-section-1" id="sec-8f87">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <h4 class="u-text u-text-1"> "Discover Products Instantly with <span class="u-text-palette-4-dark-2">AI-Powered</span> Image Search!"</h4>
+            <div class="search-container">
+                <form method="get" action="{% url 'search' %}">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <!-- Search Box -->
+                        <input
+                            type="text"
+                            name="q"
+                            placeholder="Search here..."
+                            class="search-box"
+                            style="flex-grow: 1;">
+
+                        <!-- Search Icon -->
+                        <button type="submit" class="search-button" style="background: none; border: none;">
+                            <i class="fas fa-search search-icon"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Category Buttons -->
+            <div class="category-buttons">
+                {% for category in categories %}
+                    <button type="button" class="category-button" onclick="filterByCategory('{{ category }}')">{{ category }}</button>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+
+    <section class="u-clearfix u-white u-section-2" id="sec-9add">
+
+        <div class="u-clearfix u-sheet u-sheet-1">
+
+        <div class="custom-expanded u-list u-list-1">
+<div style="margin-bottom: 40px; margin-top: -60px;display: flex; justify-content: flex-end; margin-right: 70px">
+    <label for="sort" style="margin-right: 10px;margin-top: 2px">Sort by:</label>
+    <select style="border-radius: 5px; padding: 2px" id="sort" onchange="sortProducts()">
+        <option value="default"> Filter By </option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="below_99">Below ₹99</option>
+        <option value="below_249">Below ₹249</option>
+        <option value="name_asc">Name: A-Z</option>
+        <option value="name_desc">Name: Z-A</option>
+    </select>
+</div>
+
+          <div class="u-repeater u-repeater-1" id="product-list">
+              {% for product in products %}
+            <div class="u-align-center u-border-2 u-border-grey-50 u-container-align-center u-container-style u-list-item u-radius u-repeater-item u-shape-round u-list-item-4" data-category="{{ product.category }}">
+              <div class="u-container-layout u-similar-container u-container-layout-4">
+                <img alt="" class="u-expanded-width u-image u-image-default u-image-4" data-image-width="2000" data-image-height="1333" src="{{ product.image.url }}">
+                <h4 class="u-text u-text-grey-80 u-text-13">{{ product.name }} </h4>
+                <p class="u-text u-text-14">
+                  <span class="{% if product.in_stock %}u-text-custom-color-1{% else %}u-text-custom-color-3{% endif %}">
+                                        {% if product.in_stock %}
+                                            In Stock
+                                        {% else %}
+                                            Stock Out
+                                        {% endif %}
+                                    </span> | {{ product.carton_quantity }}/Carton
+                </p>
+                <p class="u-text u-text-15"> Company: {{ product.user.profile.company_name }}</p>
+                <p class="u-text u-text-16"> ₹{{ product.price }}</p>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+        <div style="text-align: center; margin-top: 20px;">
+    {% if products.has_previous %}
+        <a href="?q={{ query }}&category={{ selected_category }}&sort={{ sort }}&page={{ products.previous_page_number }}" class="pagination-btn">Previous</a>
+    {% endif %}
+
+    <span>Page {{ products.number }} of {{ products.paginator.num_pages }}</span>
+
+    {% if products.has_next %}
+        <a href="?q={{ query }}&category={{ selected_category }}&sort={{ sort }}&page={{ products.next_page_number }}" class="pagination-btn">Next</a>
+    {% endif %}
+</div>
+
+    </section>
+</div>
+
+<script>
+    // Filter products by category when a category button is clicked
+    function filterByCategory(category) {
+        let products = document.querySelectorAll('.u-repeater-item');
+        products.forEach(function(product) {
+            if (category === '' || product.getAttribute('data-category') === category) {
+                product.style.display = 'block'; // Show product
+            } else {
+                product.style.display = 'none'; // Hide product
+            }
+        });
+    }
+
+    function sortProducts() {
+    const sortValue = document.getElementById("sort").value;
+
+    const queryParams = new URLSearchParams(window.location.search);
+    queryParams.set('sort', sortValue); // Add or update the sort parameter
+    queryParams.set('page', 1); // Reset to the first page after sorting
+
+    const url = `${window.location.pathname}?${queryParams.toString()}`;
+    window.location.href = url; // Redirect to apply the sorting
+}
+
+
+
+
+</script>
+
+<script>
+    let currentPage = 1;
+
+function changePage(direction) {
+    currentPage += direction;
+    if (currentPage < 1) currentPage = 1; // Prevent going to a negative page
+    fetchProducts(currentPage);
+}
+
+function fetchProducts(page) {
+    const query = new URLSearchParams(window.location.search);
+    query.set('page', page); // Set the page query parameter
+
+    const url = `${window.location.pathname}?${query.toString()}`;
+    window.location.href = url; // Redirect to fetch the next page
+}
+
+</script>
+
+{% endblock %}
+</body>
+</html>
