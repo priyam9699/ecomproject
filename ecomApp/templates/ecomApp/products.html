@@ -1,0 +1,235 @@
+{% extends "ecomApp/layout.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .product-container {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  gap: 10px; /* Add spacing between icons */
+}
+
+.product-container:hover .icon-overlay {
+  display: flex;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5); /* Optional background for better visibility */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Icon color */
+  font-size: 20px; /* Icon size */
+}
+
+.icon:hover {
+  background: rgba(0, 0, 0, 0.7);
+  color: deepskyblue; /* Highlight color on hover */
+}
+
+
+.icon img {
+  width: 20px;
+  height: 20px;
+  filter: invert(1); /* Optional: Invert color for better visibility */
+}
+
+    </style>
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>Products</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+    <link rel="stylesheet" href="Products.css" media="screen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script>
+        function confirmDelete(Id) {
+            if (confirm("Are you sure you want to delete this product? This action cannot be undone.")) {
+                // Find the form associated with the product and submit it
+                document.getElementById('delete-form-' + Id).submit();
+            }
+        }
+    </script>
+    <style>
+        /* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Close Button */
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+    </style>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 7.0.3, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+
+
+
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "Ecommerce",
+		"logo": "images/default-logo.png"
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Products">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+</head>
+  <body data-path-to-root="./" data-include-products="true" class="u-body u-xl-mode" data-lang="en">
+  <div class="content">
+      <section class="u-clearfix u-white u-section-1" id="sec-4776">
+      <div class="u-clearfix u-sheet u-sheet-1"><span style="margin:53px auto -30px" class="u-file-icon u-icon u-icon-1"><img src="{% static 'images/4143786.png' %}" alt=""></span>
+        <h3 style="margin-left: 460px; font-size: 35px;" class="u-text u-text-default u-text-1">PRODUCTS</h3>
+        <a style="margin: -37px 36px 0 900px; padding: 8px 30px; font-weight: bold" href="{% url 'addproducts' %}" class="u-border-2 u-border-grey-75 u-border-hover-grey-75 u-btn u-button-style u-radius u-text-active-black u-text-hover-black u-btn-1"><span class="u-file-icon u-icon"><img src="{% static 'images/32563.png' %}" alt=""></span>&nbsp;Add PRODUCTS
+        </a>
+
+        <div class="custom-expanded u-list u-list-1">
+          <div class="u-repeater u-repeater-1">
+{% for product in products %}
+<div class="u-align-center u-container-style u-list-item u-repeater-item">
+  <div class="u-container-layout u-similar-container u-container-layout-2">
+    <div class="product-container">
+      <img alt="" class="u-expanded-width u-image u-image-default u-image-2" data-image-width="2000" data-image-height="1333" src="{{ product.image.url }}">
+      <!-- Edit and Delete Icons -->
+      <div class="icon-overlay">
+          {% if product.id %}
+        <a href="{% url 'editproduct' product.id %}" class="icon edit-icon">
+            <i class="fas fa-edit"></i>
+        </a>
+<form id="delete-form-{{ product.id }}" action="{% url 'deleteproduct' product.id %}" method="POST" style="display: none;">
+                        {% csrf_token %}
+                        <button type="submit" style="display: none;"></button>
+                    </form>
+                    <a href="javascript:void(0);" class="icon delete-icon" onclick="confirmDelete({{ product.id }});">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+
+          {% else %}
+        <span class="text-danger">No Actions</span>
+          {% endif %}
+      </div>
+    </div>
+    <h4 class="u-text u-text-6">{{ product.name }}</h4>
+<h4 class="u-text u-text-7">
+  <span class="{% if product.in_stock %}u-text-custom-color-1{% else %}u-text-custom-color-3{% endif %}">
+    {% if product.in_stock %}
+      In Stock
+    {% else %}
+      Stock Out
+    {% endif %}
+  </span> | {{ product.carton_quantity }}/Carton
+</h4>
+
+    <p class="u-text u-text-8">Company: {{ product.user.profile.company_name }}</p>
+    <p class="u-text u-text-9">₹{{ product.price }}</p>
+  </div>
+</div>
+<!-- Custom Confirmation Popup -->
+<div id="confirmationModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Are you sure you want to delete this product?</h3>
+        <p>This action cannot be undone.</p>
+        <button id="confirmDeleteBtn" class="btn btn-danger">Yes, delete</button>
+        <button onclick="closeModal()" class="btn btn-secondary">Cancel</button>
+    </div>
+</div>
+
+{% endfor %}
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  {% endblock %}
+
+
+
+</body>
+</html>

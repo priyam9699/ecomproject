@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Welcome To Admin Panel</h1>
+<form method="get" action="">
+    <label for="role">Select Role:</label>
+    <select name="role" id="role" onchange="this.form.submit()">
+        <option value="Wholeseller" {% if role == 'Wholeseller' %}selected{% endif %}>Wholeseller</option>
+        <option value="Customer" {% if role == 'Customer' %}selected{% endif %}>Customer</option>
+    </select>
+</form>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add User</button>
+</form>
+
+
+</body>
+</html>

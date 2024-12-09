@@ -1,0 +1,245 @@
+{% extends "ecomApp/layout.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="​Any questions? Simply ask us this is you home!, ​Get started now!">
+    <meta name="description" content="">
+    <title>Add Products</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+<link rel="stylesheet" href="Add-Products.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script>
+    document.getElementById('in_stock').addEventListener('change', function () {
+        const statusText = document.getElementById('stock-status-text');
+        statusText.textContent = this.checked ? 'In Stock' : 'Out of Stock';
+    });
+</script>
+
+    <style>
+        .messages {
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 10px;
+}
+    .form-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two equal columns */
+        gap: 20px; /* Space between columns and rows */
+        padding: 35px;
+
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column; /* Stack label and input */
+    }
+
+    .u-label {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .u-input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+
+    .u-button {
+    grid-column: 1 / 2; /* Place the button in the first column */
+    justify-self: start; /* Align the button to the start of the column */
+    padding: 10px 20px;
+    border-color: black;
+        margin-left: 0;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 170px;
+    transition: background-color 1s ease, transform 0.5s ease;
+}
+
+    .u-button:hover {
+        transform: scale(1.05);
+        background-color: #356aa8;
+    }
+    .switch-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 25px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #356aa8;
+}
+
+input:checked + .slider:before {
+    transform: translateX(25px);
+}
+#category {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+/* Hover and focus effects */
+#category:hover, #category:focus {
+    border-color: grey;
+}
+
+/* Label styling */
+label[for="category"] {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+    </style>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 7.0.3, nicepage.com">
+    <meta name="referrer" content="origin">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+
+
+
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "Ecommerce",
+		"logo": "images/default-logo.png"
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Add Products">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+  <body data-path-to-root="./" data-include-products="true" class="u-body u-xl-mode" data-lang="en">
+
+
+  <div class="content">
+      <section class="u-clearfix u-valign-bottom-sm u-valign-bottom-xs u-white u-section-1" id="sec-f944">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h4 class="u-text u-text-default u-text-1">EDIT PRODUCT </h4>
+        <div class="u-border-3 u-border-grey-dark-1 u-line u-line-horizontal u-line-1"></div>
+        <div style="height: 600px" class="custom-expanded u-form u-grey-5 u-radius u-form-1">
+            <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-container">
+        <div class="form-group">
+            <label for="product_name" class="u-label">Product Name</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            <label for="sku" class="u-label">SKU</label>
+            {{ form.sku }}
+        </div>
+        <div class="form-group">
+            <label for="price" class="u-label">Price</label>
+            {{ form.price }}
+        </div>
+
+        <div class="form-group">
+            <label for="image" class="u-label">Image Upload</label>
+            {% if form.instance.image %}
+                <img src="{{ form.instance.image.url }}" alt="Current Image"  class="img-thumbnail" style="width: 50px; height: 50px;" >
+            {% else %}
+                <p>No image uploaded</p>
+            {% endif %}
+            {{ form.image }}
+        </div>
+
+        <div class="form-group">
+            <label for="hsn_code" class="u-label">HSN Code</label>
+            {{ form.hsn_code }}
+        </div>
+        <div class="form-group">
+            <label for="pieces_per_carton" class="u-label">Carton Quantity</label>
+            {{ form.carton_quantity }}
+        </div>
+        <div class="form-group">
+            <label for="in_stock" class="u-label">Stock Status</label>
+            <div class="switch-container">
+                <label class="switch">
+                    <input type="checkbox" name="in_stock" id="in_stock" value="true" {% if form.in_stock.value %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+                <span id="stock-status-text">{{ form.in_stock.value|yesno:"In Stock,Out of Stock" }}</span>
+            </div>
+        </div>
+
+
+         <div>
+        <label for="category">Category</label>
+        {{ form.category }}
+    </div>
+        <div class="form-group">
+    <div style="display: flex; justify-content: start;">
+        <button style="width: 200px" type="submit" class="u-button">UPDATE PRODUCT</button>
+    </div>
+</div>
+
+    </div>
+</form>
+
+
+        </div>
+      </div>
+    </section>
+  </div>
+  {% endblock %}
+</body>
+</html>
