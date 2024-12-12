@@ -101,8 +101,8 @@
         .category-button {
             padding: 5px 20px;
             border-color: black;
+            border-width: 1px;
             color: black;
-
             border-radius: 30px;
             cursor: pointer;
         }
@@ -159,6 +159,7 @@
 
 .category-button {
     flex-shrink: 0; /* Prevent buttons from shrinking */
+    padding: 5px 10px;
 }
 
     /* Sort container adjustments */
@@ -176,7 +177,8 @@
 <div class="content">
     <section class="u-clearfix u-white u-section-1" id="sec-8f87">
         <div class="u-clearfix u-sheet u-sheet-1">
-            <h4 class="u-text u-text-1"> "Discover Products Instantly with <span class="u-text-palette-4-dark-2">AI-Powered</span> Image Search!"</h4>
+            <h4 class="u-align-center-xs u-text u-text-1"> "Discover Products Instantly with <span class="u-text-palette-4-dark-2">AI-Powered</span> Image Search!"
+        </h4>
             <div class="search-container">
                 <form method="get" action="{% url 'search' %}">
                     <div style="display: flex; align-items: center; gap: 10px;">
@@ -225,10 +227,11 @@
 
           <div class="u-repeater u-repeater-1" id="product-list">
               {% for product in products %}
-            <div class="u-align-center u-border-2 u-border-grey-50 u-container-align-center u-container-style u-list-item u-radius u-repeater-item u-shape-round u-list-item-4" data-category="{{ product.category }}">
-              <div class="u-container-layout u-similar-container u-container-layout-4">
-                <img alt="" class="u-expanded-width u-image u-image-default u-image-4" data-image-width="2000" data-image-height="1333" src="{{ product.image.url }}">
+              <div class="u-align-center u-border-1 u-border-grey-50 u-container-align-center u-container-align-center-lg u-container-align-center-md u-container-align-center-sm u-container-align-center-xl u-container-style u-list-item u-radius u-repeater-item u-shape-round u-list-item-1" data-category="{{ product.category }}">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img alt="" class="u-expanded-width u-image u-image-default u-image-2" data-image-width="2000" data-image-height="1333" src="{{ product.image.url }}">
                 <h4 class="u-text u-text-grey-80 u-text-13">{{ product.name }} </h4>
+
                 <p class="u-text u-text-14">
                   <span class="{% if product.in_stock %}u-text-custom-color-1{% else %}u-text-custom-color-3{% endif %}">
                                         {% if product.in_stock %}
@@ -238,11 +241,13 @@
                                         {% endif %}
                                     </span> | {{ product.carton_quantity }}/Carton
                 </p>
+
                 <p class="u-text u-text-15"> Company: {{ product.user.profile.company_name }}</p>
                 <p class="u-text u-text-16"> ₹{{ product.price }}</p>
               </div>
             </div>
               {% endfor %}
+
           </div>
         </div>
       </div>
@@ -259,6 +264,7 @@
 </div>
 
     </section>
+
 </div>
 
 <script>
