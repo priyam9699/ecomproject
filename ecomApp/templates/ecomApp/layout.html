@@ -1,24 +1,13 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="en"><head>
+<html style="font-size: 16px;" lang="en">
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-	<link rel="icon" type="image/png" href="{% static 'images/Ecom-detective-logo-removebg-preview.png' %}">
-    <meta name="keywords" content="Ecom Detective, Surat wholesale products, Image-based product search, Text-based product search, Wholesale ecommerce products, Cheap products for Amazon sellers, Flipkart seller resources, Meesho seller product sourcing, Surat wholesalers online, Affordable wholesale products, Amazon Flipkart product ideas, Wholesale platform for sellers, Products for Meesho resellers, Best Surat wholesale deals, Seller tools for ecommerce, Find Surat wholesalers for Amazon Flipkart, Cheapest wholesale products for reselling, Image search for ecommerce products Surat, Text search for Surat wholesale products, Reselling products from Surat wholesalers, Wholesale platform for online sellers in India">
-    <meta name="description" content="Ecom Detective - Discover a platform to easily find wholesale ecommerce products from Surat using image and text search. Perfect for sellers on Amazon, Flipkart, and Meesho, offering affordable products directly from Surat wholesalers. Simplify your product sourcing today!">
-
-	
-    <title>Ecom Detective - Wholesale Product Search Platform for Amazon, Flipkart, and Meesho Sellers</title>
-	<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W7J11RR7DV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-W7J11RR7DV');
-</script>
+    <meta name="keywords" content="​Sarah Thompson, ​Art in Every Frame">
+    <meta name="description" content="">
+    <title>Home</title>
     <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
 <link rel="stylesheet" href="{% static 'css/index.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'css/search.css' %}" media="screen">
@@ -49,21 +38,14 @@
 		"logo": "images/default-logo.png"
 }</script>
     <meta name="theme-color" content="#478ac9">
-   <meta property="og:title" content="Ecom Detective - Find Wholesale Products from Surat for Ecommerce Sellers">  
-<meta property="og:description" content="Ecom Detective helps you discover affordable wholesale products from Surat using image and text search. Ideal for Amazon, Flipkart, and Meesho sellers in India. Simplify your product sourcing today!">  
-<meta property="og:type" content="website">  
-<meta property="og:url" content="https://ecomdetective.com/">  
-<meta property="og:image" content="https://ecomdetective.com/assets/images/Ecom-detective-logo-removebg-preview.jpg">  
-<meta property="og:site_name" content="Ecom Detective">  
-<meta property="og:locale" content="en_IN">  
-
-
-  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
-  <body data-home-page="Home.html" data-home-page-title="Home" data-path-to-root="./" data-include-products="true" class="u-body u-xl-mode" data-lang="en">
-  <header class="u-align-left u-clearfix u-container-align-left u-header u-section-row-container" id="sec-f866"><div class="u-section-rows">
+    <meta property="og:title" content="Home">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+</head>
+  <body data-path-to-root="./" data-include-products="true" class="u-body u-xl-mode" data-lang="en"><header class="u-align-left u-clearfix u-container-align-left u-header u-section-row-container" id="sec-f866"><div class="u-section-rows">
         <div class="u-black u-section-row u-section-row-1" id="sec-46aa">
           <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-            <p class="u-custom-font u-font-montserrat u-text u-text-default u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1000" data-animation-delay="0"> "Just Drop Your Snap & Find it in easy way !"</p>
+            <p class="u-align-center-xs u-custom-font u-font-montserrat u-text u-text-default u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1000" data-animation-delay="0"> "Just Drop Your Snap &amp; Find it in easy way !"</p>
           </div>
 
 
@@ -71,10 +53,10 @@
 
 
         </div>
-        <div class="u-section-row u-white u-section-row-2" id="sec-37e8">
+        <div class="u-grey-10 u-section-row u-sticky u-sticky-5c67 u-section-row-2" id="sec-37e8">
           <div class="u-clearfix u-sheet u-sheet-2">
-            <a  href="#" class="u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
-              <img src="{% static 'images/Ecom-detective-logo-removebg-preview.png'%}" style="width: 160px;" data-image-width="180">
+            <a href="#" class="u-image u-logo u-image-1" data-image-width="761" data-image-height="328">
+              <img src="{% static 'images/Ecom-detective-logo-removebg-preview.png' %}" class="u-logo-image u-logo-image-1" data-image-width="80">
             </a>
             <nav data-position="" class="u-menu u-menu-one-level u-offcanvas u-menu-1">
               <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 700;">
@@ -85,8 +67,8 @@
                 </a>
               </div>
               <div class="u-custom-menu u-nav-container">
-<ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-    <li class="u-nav-item">
+<ul class="u-nav u-unstyled u-nav-1">
+                        <li class="u-nav-item">
         <a class="u-button-style u-nav-link" href="{% url 'homepage' %}">Home</a>
     </li>
     {% if user.profile.role == 'Customer' %}
@@ -112,23 +94,25 @@
             <a class="u-button-style u-nav-link" href="{% url 'login' %}">Register/Login</a>
         </li>
     {% endif %}
-</ul>
+                </ul>
 
               </div>
+
               <div class="u-custom-menu u-nav-container-collapse">
                 <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
                   <div class="u-inner-container-layout u-sidenav-overflow">
                     <div class="u-menu-close"></div>
                     <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="./">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Search.html">Search</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Products.html" target="_blank">Products</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" target="_blank">Register/Login</a>
 </li></ul>
                   </div>
                 </div>
                 <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
               </div>
-            </nav><span class="u-file-icon u-icon u-icon-1"><img src="{% static 'images/747376.png' %}" alt=""></span>
+            </nav>
+            <span class="u-file-icon u-hidden-xs u-icon u-icon-1">
+              <img src="{% static 'images/747376.png' %}" alt="">
+            </span>
           </div>
 
 
@@ -136,14 +120,17 @@
 
 
         </div>
-      </div></header>
+      </div>
+    </header>
+
   <div class="content">
      {% block content %}
                 {% endblock %}
   </div>
 
 
-<footer class="u-align-center u-clearfix u-container-align-center u-footer u-white u-footer" id="sec-ed7a"><div class="u-clearfix u-sheet u-sheet-1">
+
+    <footer class="u-align-center u-clearfix u-container-align-center u-footer u-white u-footer" id="sec-ed7a"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="#" class="u-image u-logo u-image-1" data-image-width="761" data-image-height="328">
           <img src="{% static 'images/Ecom-detective-logo-removebg-preview.png' %}" class="u-logo-image u-logo-image-1" data-image-width="80">
         </a>
