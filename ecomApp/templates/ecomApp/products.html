@@ -163,15 +163,18 @@ button {
   <body data-path-to-root="./" data-include-products="true" class="u-body u-xl-mode" data-lang="en">
   <div class="content">
       <section class="u-clearfix u-white u-section-1" id="sec-4776">
-      <div class="u-clearfix u-sheet u-sheet-1"><span style="margin:53px auto -30px" class="u-file-icon u-icon u-icon-1"><img src="{% static 'images/4143786.png' %}" alt=""></span>
-        <h3 class="u-text u-text-default u-text-1">PRODUCTS</h3>
-        <a style="font-weight: bold" href="{% url 'addproducts' %}" class="u-border-2 u-border-grey-75 u-border-hover-grey-75 u-btn u-button-style u-radius u-text-active-black u-text-hover-black u-btn-1"><span class="u-file-icon u-icon"><img src="{% static 'images/32563.png' %}" alt=""></span>&nbsp;Add
+      <div class="u-clearfix u-sheet u-sheet-1">
+          <span style="margin:53px auto -30px" class="u-file-icon u-icon u-icon-1">
+              <img src="{% static 'images/4143786.png' %}" alt=""></span>
+        <h3  class="u-text u-text-default u-text-1">PRODUCTS</h3>
+
+        <a style=" font-weight: bold" href="{% url 'addproducts' %}" class="u-border-2 u-border-grey-75 u-border-hover-grey-75 u-btn u-button-style u-radius u-text-active-black u-text-hover-black u-btn-1"><span class="u-file-icon u-icon"><img src="{% static 'images/32563.png' %}" alt=""></span>&nbsp;Add
         </a>
 
         <div class="custom-expanded u-list u-list-1">
           <div class="u-repeater u-repeater-1">
 {% for product in products %}
-<div class="u-align-center u-container-style u-list-item u-repeater-item">
+<div class="u-align-center u-border-1 u-border-grey-50 u-container-align-center u-container-style u-list-item u-radius u-repeater-item u-shape-round u-list-item-2">
   <div class="u-container-layout u-similar-container u-container-layout-2">
     <div class="product-container">
       <img alt="" class="u-expanded-width u-image u-image-default u-image-2" data-image-width="2000" data-image-height="1333" src="{{ product.image.url }}">
@@ -226,6 +229,9 @@ button {
         </div>
       </div>
     </section>
+
+
+
   </div>
   {% endblock %}
 
