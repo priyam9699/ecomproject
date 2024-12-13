@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-3e125$k#x#b6lu5ge!^@iy41=0y7z_!o==!-kto)03w!2e_b&e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hammerhead-app-vgpve.ondigitalocean.app','ecomdetective.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['hammerhead-app-vgpve.ondigitalocean.app','ecomdetective.com', '127.0.0.1', 'localhost', '*']
 
 
 # Application definition
