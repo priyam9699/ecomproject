@@ -29,6 +29,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['hammerhead-app-vgpve.ondigitalocean.app','ecomdetective.com', '127.0.0.1', 'localhost', '*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://ecomdetective.com',
+    'https://www.ecomdetective.com',
+    'https://hammerhead-app-vgpve.ondigitalocean.app',
+]
 
 # Application definition
 
@@ -135,6 +140,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Secure cookies for production
+CSRF_COOKIE_SECURE = True  # Ensure CSRF cookies are only sent over HTTPS
+SESSION_COOKIE_SECURE = True  # Ensure session cookies are only sent over HTTPS
+
+# Additional security settings
+SECURE_BROWSER_XSS_FILTER = True  # Prevent XSS attacks
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent MIME type sniffing
+SECURE_HSTS_SECONDS = 31536000  # Enforce HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to subdomains
+SECURE_HSTS_PRELOAD = True  # Allow browsers to preload HSTS
 
 SESSION_COOKIE_AGE = 3600  # 300 seconds = 5 minutes
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
