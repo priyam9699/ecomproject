@@ -82,11 +82,10 @@
         </li>
     {% endif %}
     <!-- Show 'Products' link only for Wholesellers -->
-{% if user.profile.role == 'Wholeseller' or user.profile.role == 'Admin' %}
     <li class="u-nav-item">
         <a class="u-button-style u-nav-link" href="{% url 'products' %}" target="_blank">Products</a>
     </li>
-{% endif %}
+
 
     {% if user.is_authenticated %}
         <li class="u-nav-item">
