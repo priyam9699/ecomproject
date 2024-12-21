@@ -84,8 +84,12 @@ WSGI_APPLICATION = 'ecomProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',  # Use PostgreSQL instead of SQLite
+        'NAME': 'ecomproject',  # Your database name
+        'USER': 'ecomuser',  # Your PostgreSQL username
+        'PASSWORD': 'Ecom@user',  # Your PostgreSQL password
+        'HOST': 'localhost',  # Host where PostgreSQL is running
+        'PORT': '5432',  # Default PostgreSQL port
     }
 }
 
