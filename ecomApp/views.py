@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
 
-def add_user(request):
+def register_view(request):
     role = request.GET.get('role', 'Wholeseller')  # Default to Wholeseller
 
     if request.method == 'POST':
@@ -70,20 +70,23 @@ def add_user(request):
     else:
         form = WholesellerForm() if role == 'Wholeseller' else CustomerForm()
 
-    return render(request, 'add_user.html', {'form': form, 'role': role})
+    return render(request, 'ecomApp/register.html', {'form': form, 'role': role})
+
 
 def login_view(request):
+    next_url = request.GET.get('next', 'homepage')  # Default to 'homepage' if 'next' is not provided
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            next_url = request.GET.get('next', 'homepage')  # Get 'next' param or redirect to default
             return redirect(next_url)
         else:
             messages.error(request, 'Invalid username or password.')
-    return render(request, 'ecomApp/login.html')
+            return render(request, 'ecomApp/login.html', {'next': next_url, 'error_message': 'Invalid username or password.'})
+    return render(request, 'ecomApp/login.html', {'next': next_url})
+
 
 def logout_view(request):
     logout(request)
@@ -93,8 +96,9 @@ def homepage_view(request):
     return render(request, 'ecomApp/homepage.html')
 
 
-from django.db.models import Q, F
-
+from django.db.models import Q
+from django.core.paginator import Paginator
+from rapidfuzz import process, fuzz
 
 def search_view(request):
     query = request.GET.get('q', '')  # Retrieve search query
@@ -118,26 +122,30 @@ def search_view(request):
     elif sort == 'below_249':
         products = products.filter(price__lt=249)
 
-    # Process multi-word queries
+    # Process the query and apply fuzzy matching
     if query:
-        search_terms = query.split()  # Split query into individual words
-        q_objects = Q()  # Create an empty Q object
+        # Retrieve all product names and their IDs
+        product_data = list(products.values('id', 'name'))
+        product_names = [item['name'] for item in product_data]
 
-        # Add Q filters for each word in relevant fields
-        for term in search_terms:
-            q_objects |= (Q(name__icontains=term) |
-                          Q(user__profile__company_name__icontains=term) |
-                          Q(price__icontains=term) |
-                          Q(sku__icontains=term))
+        # Use fuzzy matching to find products that closely match the query
+        matches = process.extract(query, product_names, scorer=fuzz.partial_ratio, limit=10)
 
-        products = products.filter(q_objects)  # Apply combined filters
+        # If any matches found, filter products based on matched IDs
+        matched_ids = [
+            product_data[i]['id'] for match, score, i in matches if score >= 60  # Adjust score threshold
+        ]
+
+        # Ensure the query results include products with a matching name
+        if matched_ids:
+            products = products.filter(id__in=matched_ids)
 
     # Filter by category if selected
     if category_id:
         products = products.filter(category=category_id)
 
     # Paginate the products queryset
-    paginator = Paginator(products, 10)  # 8 products per page
+    paginator = Paginator(products, 8)  # 8 products per page
     paginated_products = paginator.get_page(page_number)
 
     # Fetch categories from the product table
@@ -152,10 +160,19 @@ def search_view(request):
     })
 
 
+
 @login_required
 def products_view(request):
-    products = Product.objects.all()
-    return render(request, 'ecomApp/products.html', {'products': products})
+    # Retrieve all products
+    products = Product.objects.filter(user=request.user)
+
+    # Pagination logic
+    page_number = request.GET.get('page', 1)  # Get the page number from the query parameters
+    paginator = Paginator(products, 8)  # 8 products per page (you can change this number)
+    paginated_products = paginator.get_page(page_number)  # Get the products for the current page
+
+    # Render the page with the paginated products
+    return render(request, 'ecomApp/products.html', {'products': paginated_products})
 
 
 @login_required

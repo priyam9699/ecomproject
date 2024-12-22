@@ -9,8 +9,9 @@ urlpatterns = [
     path('addproduct/', views.addproduct_view, name='addproducts'),
     path('edit/<int:id>/', views.editproduct_view, name='editproduct'),
     path('deleteproduct/<int:id>/', views.deleteproduct_view, name='deleteproduct'),
-    path('add_user/', views.add_user, name='add_user'),  # Add path for /add_user/
+
 
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('register/', views.register_view, name='register'),
 ]
