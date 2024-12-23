@@ -4,13 +4,52 @@ from .models import Product
 
 
 class WholesellerForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    company_name = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    phone_no = forms.CharField(max_length=15)
-    address = forms.CharField(widget=forms.Textarea)
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your full name',
+        })
+    )
+    company_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your company name',
+        })
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your email address',
+        })
+    )
+    phone_no = forms.CharField(
+        max_length=15,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your phone number',
+        })
+    )
+    address = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your address',
+            'rows': 3,
+        })
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your password',
+        })
+    )
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Confirm your password',
+        })
+    )
 
     def clean(self):
         cleaned_data = super().clean()
@@ -20,14 +59,56 @@ class WholesellerForm(forms.Form):
             raise forms.ValidationError("Passwords do not match")
 
 class CustomerForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    phone_no = forms.CharField(max_length=15)
-    sell_on_amazon = forms.BooleanField(required=False)
-    sell_on_flipkart = forms.BooleanField(required=False)
-    sell_on_meesho = forms.BooleanField(required=False)
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your full name',
+        })
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your email address',
+        })
+    )
+    phone_no = forms.CharField(
+        max_length=15,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your phone number',
+        })
+    )
+    sell_on_amazon = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={
+            'class': 'form-check-input',
+        })
+    )
+    sell_on_flipkart = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={
+            'class': 'form-check-input',
+        })
+    )
+    sell_on_meesho = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={
+            'class': 'form-check-input',
+        })
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your password',
+        })
+    )
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Confirm your password',
+        })
+    )
 
     def clean(self):
         cleaned_data = super().clean()
@@ -35,6 +116,7 @@ class CustomerForm(forms.Form):
         confirm_password = cleaned_data.get('confirm_password')
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match")
+
 
 
 class ProductForm(forms.ModelForm):
