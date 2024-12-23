@@ -34,7 +34,7 @@ class Product(models.Model):
     sku = models.CharField(max_length=50, unique=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='products/')
-    hsn_code = models.CharField(max_length=20)
+    hsn_code = models.CharField(max_length=20, null=True, blank=True)
     carton_quantity = models.PositiveIntegerField()
     in_stock = models.BooleanField(default=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='Electronics')
