@@ -5,13 +5,13 @@
 .u-section-1 .u-text-1 {
   font-weight: 700;
   font-size: 1.875rem;
-  margin: 54px -21px 0 473px;
+  margin: 48px -21px 0 477px;
 }
 
 .u-section-1 .u-line-1 {
   width: 182px;
   transform-origin: left center;
-  margin: 7px auto 0 29px;
+  margin: 7px auto 0 516px;
 }
 
 .u-section-1 .u-form-1 {
@@ -121,7 +121,7 @@
 .u-section-1 .u-btn-1 {
   background-image: none;
   font-weight: 600;
-
+  padding: 5px 76px 5px 75px;
 }
 
 @media (max-width: 1199px) {
