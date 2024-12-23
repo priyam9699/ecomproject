@@ -6,6 +6,8 @@
 </head>
 <body>
 <h1>Welcome To Admin Panel</h1>
+
+
 <form method="get" action="">
     <label for="role">Select Role:</label>
     <select name="role" id="role" onchange="this.form.submit()">
@@ -19,7 +21,7 @@
     {{ form.as_p }}
     <button type="submit">Add User</button>
 </form>
-
+<a class="u-button-style u-nav-link" href="{% url 'login' %}">Register/Login</a>
 
 </body>
 </html>

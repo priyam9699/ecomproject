@@ -224,6 +224,17 @@ button {
 </div>
 
 {% endfor %}
+                      <div style="margin-left: 50px; margin-top: 20px;">
+    {% if products.has_previous %}
+        <a href="?q={{ query }}&category={{ selected_category }}&sort={{ sort }}&page={{ products.previous_page_number }}" class="pagination-btn">Previous</a>
+    {% endif %}
+
+    <span>Page {{ products.number }} of {{ products.paginator.num_pages }}</span>
+
+    {% if products.has_next %}
+        <a href="?q={{ query }}&category={{ selected_category }}&sort={{ sort }}&page={{ products.next_page_number }}" class="pagination-btn">Next</a>
+    {% endif %}
+</div>
 
           </div>
         </div>
