@@ -106,7 +106,8 @@ def search_view(request):
     sort = request.GET.get('sort', '')
     page_number = request.GET.get('page', 1)  # Get the current page number
 
-    products = Product.objects.filter(user__profile__role='Wholeseller')  # Base queryset
+    # Base queryset for all products belonging to Wholeseller users
+    products = Product.objects.filter(user__profile__role='Wholeseller')
 
     # Apply sorting
     if sort == 'price_asc':
@@ -145,10 +146,10 @@ def search_view(request):
         products = products.filter(category=category_id)
 
     # Paginate the products queryset
-    paginator = Paginator(products, 12)  # 8 products per page
+    paginator = Paginator(products, 8)  # 8 products per page
     paginated_products = paginator.get_page(page_number)
 
-    # Fetch categories from the product table
+    # Fetch all categories from the product table
     categories = Product.objects.values_list('category', flat=True).distinct()
 
     return render(request, 'ecomApp/search.html', {
@@ -158,6 +159,7 @@ def search_view(request):
         'selected_category': category_id,
         'sort': sort,
     })
+
 
 
 
