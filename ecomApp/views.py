@@ -145,7 +145,7 @@ def search_view(request):
         products = products.filter(category=category_id)
 
     # Paginate the products queryset
-    paginator = Paginator(products, 8)  # 8 products per page
+    paginator = Paginator(products, 12)  # 8 products per page
     paginated_products = paginator.get_page(page_number)
 
     # Fetch categories from the product table
@@ -178,19 +178,33 @@ def products_view(request):
 @login_required
 def addproduct_view(request):
     if request.method == 'POST':
-        # Get form data
-        product_name = request.POST.get('product_name')
-        sku = request.POST.get('sku')
-        price = request.POST.get('price')
-        hsn_code = request.POST.get('hsn_code')
-        carton_quantity = request.POST.get('pieces_per_carton')
+        # Get form data with defaults for empty fields
+        product_name = request.POST.get('product_name', '').strip()
+        sku = request.POST.get('sku', '').strip()
+        price = request.POST.get('price', '0').strip()
+        hsn_code = request.POST.get('hsn_code', '').strip()
+        carton_quantity = request.POST.get('pieces_per_carton', '0').strip()
         in_stock = request.POST.get('in_stock') == 'true'
-        category = request.POST.get('category')
+        category = request.POST.get('category', '').strip()
         image = request.FILES.get('image')
 
-        # Optional: Validate the data (e.g., check for unique SKU)
+        # Validate required fields
+        if not product_name or not sku or not price:
+            messages.error(request, "Product name, SKU, and price are required.")
+            return redirect('add_product')  # Replace with the correct URL name
+
+        # Validate SKU uniqueness
         if Product.objects.filter(sku=sku).exists():
-            return HttpResponse("A product with this SKU already exists!")
+            messages.error(request, "A product with this SKU already exists!")
+            return redirect('add_product')  # Replace with the correct URL name
+
+        # Convert price and carton_quantity to numeric types
+        try:
+            price = float(price)
+            carton_quantity = int(carton_quantity) if carton_quantity.isdigit() else 0
+        except ValueError:
+            messages.error(request, "Invalid numeric values for price or carton quantity.")
+            return redirect('add_product')
 
         # Save the product
         Product.objects.create(
@@ -204,14 +218,14 @@ def addproduct_view(request):
             image=image,
             user=request.user,
         )
-        # Add success message
         messages.success(request, "Product added successfully!")
+        return redirect('products')  # Replace 'products' with the correct URL name for the product list
 
-        return redirect('products')  # Replace 'success_page' with your URL name
-
-    context = {'category_choices': Product.CATEGORY_CHOICES}
-
-    return render(request, 'ecomApp/addproducts.html', context)  # Ensure this template exists
+    # Context for the form
+    context = {
+        'category_choices': Product.CATEGORY_CHOICES,  # Replace with your actual category choices
+    }
+    return render(request, 'ecomApp/addproducts.html', context)
 
 
 @login_required
