@@ -145,7 +145,7 @@ def search_view(request):
         products = products.filter(category=category_id)
 
     # Paginate the products queryset
-    paginator = Paginator(products, 8)  # 8 products per page
+    paginator = Paginator(products, 12)  # 8 products per page
     paginated_products = paginator.get_page(page_number)
 
     # Fetch categories from the product table
