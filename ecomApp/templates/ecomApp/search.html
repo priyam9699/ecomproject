@@ -397,53 +397,61 @@
       </p>
     </section>
 
-
-      <script>
+<script>
     // Filter products by category when a category button is clicked
     function filterByCategory(category) {
+        // Select all product items in the entire dataset, not just the current page
         let products = document.querySelectorAll('.u-repeater-item');
+
         products.forEach(function(product) {
-            if (category === '' || product.getAttribute('data-category') === category) {
+            // Get the product's category from the data-category attribute
+            let productCategory = product.getAttribute('data-category');
+
+            // Check if the category is selected or if there's no filter (empty category means show all)
+            if (category === '' || productCategory === category) {
                 product.style.display = 'block'; // Show product
             } else {
                 product.style.display = 'none'; // Hide product
             }
         });
+
+        // Update the URL with the selected category (to keep the category in the URL)
+        const queryParams = new URLSearchParams(window.location.search);
+        queryParams.set('category', category); // Add or update the category parameter
+        queryParams.set('page', 1); // Reset to the first page after filtering
+
+        const url = `${window.location.pathname}?${queryParams.toString()}`;
+        window.location.href = url; // Redirect to apply the filter
     }
 
+    // Sorting function to sort products by selected value
     function sortProducts() {
-    const sortValue = document.getElementById("sort").value;
+        const sortValue = document.getElementById("sort").value;
 
-    const queryParams = new URLSearchParams(window.location.search);
-    queryParams.set('sort', sortValue); // Add or update the sort parameter
-    queryParams.set('page', 1); // Reset to the first page after sorting
+        const queryParams = new URLSearchParams(window.location.search);
+        queryParams.set('sort', sortValue); // Add or update the sort parameter
+        queryParams.set('page', 1); // Reset to the first page after sorting
 
-    const url = `${window.location.pathname}?${queryParams.toString()}`;
-    window.location.href = url; // Redirect to apply the sorting
-}
+        const url = `${window.location.pathname}?${queryParams.toString()}`;
+        window.location.href = url; // Redirect to apply the sorting
+    }
 
-
-
-
-</script>
-
-<script>
+    // Pagination functions (changePage and fetchProducts)
     let currentPage = 1;
 
-function changePage(direction) {
-    currentPage += direction;
-    if (currentPage < 1) currentPage = 1; // Prevent going to a negative page
-    fetchProducts(currentPage);
-}
+    function changePage(direction) {
+        currentPage += direction;
+        if (currentPage < 1) currentPage = 1; // Prevent going to a negative page
+        fetchProducts(currentPage);
+    }
 
-function fetchProducts(page) {
-    const query = new URLSearchParams(window.location.search);
-    query.set('page', page); // Set the page query parameter
+    function fetchProducts(page) {
+        const query = new URLSearchParams(window.location.search);
+        query.set('page', page); // Set the page query parameter
 
-    const url = `${window.location.pathname}?${query.toString()}`;
-    window.location.href = url; // Redirect to fetch the next page
-}
-
+        const url = `${window.location.pathname}?${query.toString()}`;
+        window.location.href = url; // Redirect to fetch the next page
+    }
 </script>
 </body>
 </html>
