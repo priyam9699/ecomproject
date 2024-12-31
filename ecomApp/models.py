@@ -35,7 +35,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='products/')
     hsn_code = models.CharField(max_length=20, null=True, blank=True)
-    carton_quantity = models.PositiveIntegerField()
+    carton_quantity = models.PositiveIntegerField(null=True, blank=True)
     in_stock = models.BooleanField(default=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='Electronics')
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Link to User model
